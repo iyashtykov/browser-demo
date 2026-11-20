@@ -10,7 +10,7 @@
   p.hint { color: #5b6475; margin-top: 0; }
   .step { border: 1px solid #d6dbe4; border-radius: 8px; padding: 16px; margin: 16px 0; }
   .step h2 { font-size: 16px; margin: 0 0 8px; }
-  button, label.btn { display: inline-block; background: #2563eb; color: #fff; border: 0; border-radius: 6px; padding: 8px 16px; font-size: 14px; cursor: pointer; }
+  button { display: inline-block; background: #2563eb; color: #fff; border: 0; border-radius: 6px; padding: 8px 16px; font-size: 14px; cursor: pointer; }
   button:disabled { background: #9aa6bd; cursor: default; }
   input[type=file] { display: none; }
   table { border-collapse: collapse; margin-top: 8px; }
@@ -25,7 +25,7 @@
 
 <div class="step">
   <h2>1. Upload data</h2>
-  <label class="btn" for="file">Upload CSV</label>
+  <button id="pick" type="button">Upload CSV</button>
   <input id="file" type="file" accept=".csv,text/csv">
   <span id="filename"></span>
   <div id="error"></div>
@@ -72,6 +72,12 @@ function renderPreview(r) {
   const p = document.getElementById('preview');
   p.replaceChildren(t);
 }
+
+document.getElementById('pick').addEventListener('click', () => {
+  const input = document.getElementById('file');
+  input.value = '';
+  input.click();
+});
 
 document.getElementById('file').addEventListener('change', async (e) => {
   const f = e.target.files[0];
